@@ -1,34 +1,38 @@
-name: Auto and Manual Workflow
+name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  auto_job:
-    name: Auto Job
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Run Auto Job
-      run: |
-        echo "Running Auto Job"
-        # Add your auto job commands here
+    - name: Run a one-line script
+      run: echo Hello, world!
 
-  manual_job:
-    name: Manual Job
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
-
+    environment: 
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    
     steps:
-    - name: Checkout Repository
+    - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Wait for User Approval
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.4.1
+
+    - name: npm install and build
       run: |
-        echo "Waiting for user approval"
-        # Add your approval logic here
+        npm ci
+        npm run build
+
+    - name: 'Deploy to production'
+      id: deploy
+      run: echo "Deploying to production server"
