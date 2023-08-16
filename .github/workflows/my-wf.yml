@@ -3,11 +3,12 @@ name: Manual Workflow
 on:
   workflow_dispatch:
     inputs:
-      environmentx:
+      environment1:
         description: 'Environment to deploy'
         required: true
         default: 'staging'
-        
+      environment2:
+        default: 'xx'        
     
 
 jobs:
