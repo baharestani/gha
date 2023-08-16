@@ -1,38 +1,30 @@
-name: CI
+name: My workflow
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - uses: actions/checkout@v2
+      - name: Build the project
+        run: echo "Building the project..."
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: 
-      name: production
-      url: ${{ steps.deploy.outputs.url }}
-    
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
+      - name: Get user approval
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const approval = await github.actions.getSecret('DEPLOY_APPROVAL');
+            if (!approval) {
+              throw new Error('Please approve the deployment before continuing.');
+            }
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.4.1
-
-    - name: npm install and build
-      run: |
-        npm ci
-        npm run build
-
-    - name: 'Deploy to production'
-      id: deploy
-      run: echo "Deploying to production server"
+      - name: Deploy the project
+        run: echo "Deploying the project..."
