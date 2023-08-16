@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # This allows manual triggering of the workflow
 
 jobs:
   auto_job:
@@ -22,6 +23,7 @@ jobs:
   manual_job:
     name: Manual Job (Runs on Manual Trigger)
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  # Condition to run only on manual trigger
 
     steps:
     - name: Checkout Repository
@@ -31,4 +33,3 @@ jobs:
       run: |
         echo "Running Manual Job"
         # Add your manual job commands here
-
