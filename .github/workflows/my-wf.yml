@@ -1,4 +1,4 @@
-name: My workflow
+name: Auto and Manual Workflow
 
 on:
   push:
@@ -6,25 +6,29 @@ on:
       - main
 
 jobs:
-  build:
+  auto_job:
+    name: Auto Job (Runs on Push)
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the project
-        run: echo "Building the project..."
 
-  deploy:
-    needs: build
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Run Auto Job
+      run: |
+        echo "Running Auto Job"
+        # Add your auto job commands here
+
+  manual_job:
+    name: Manual Job (Runs on Manual Trigger)
     runs-on: ubuntu-latest
-    steps:
-      - name: Get user approval
-        uses: actions/github-script@v3
-        with:
-          script: |
-            const approval = await github.actions.getSecret('DEPLOY_APPROVAL');
-            if (!approval) {
-              throw new Error('Please approve the deployment before continuing.');
-            }
 
-      - name: Deploy the project
-        run: echo "Deploying the project..."
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Run Manual Job
+      run: |
+        echo "Running Manual Job"
+        # Add your manual job commands here
+
