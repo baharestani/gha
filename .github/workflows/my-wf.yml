@@ -1,26 +1,34 @@
-name: Manual Workflow
+name: Auto and Manual Workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment1:
-        description: 'Environment to deploy'
-        required: true
-        default: 'staging'
-      environment2:
-        default: 'xx'        
-    
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    name: Deploy
+  auto_job:
+    name: Auto Job
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Deploy to Environment
+    - name: Run Auto Job
       run: |
-        echo "Deploying to ${{ github.event.inputs.environmentx }} environment"
-        # Add your deployment commands here
+        echo "Running Auto Job"
+        # Add your auto job commands here
+
+  manual_job:
+    name: Manual Job
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Wait for User Approval
+      run: |
+        echo "Waiting for user approval"
+        # Add your approval logic here
