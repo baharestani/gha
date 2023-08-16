@@ -4,4 +4,4 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ secrets.TEST }}
+      - run: echo ${{ secrets.TEST == 'hello' }}
