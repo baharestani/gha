@@ -1,35 +1,7 @@
-name: Auto and Manual Workflow
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:  # This allows manual triggering of the workflow
-
+name: GitHub Actions Demo
+on: [push]
 jobs:
-  auto_job:
-    name: Auto Job (Runs on Push)
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Run Auto Job
-      run: |
-        echo "Running Auto Job"
-        # Add your auto job commands here
-
-  manual_job:
-    name: Manual Job (Runs on Manual Trigger)
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  # Condition to run only on manual trigger
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Run Manual Job
-      run: |
-        echo "Running Manual Job"
-        # Add your manual job commands here
+      - run: echo ${{ secrets.TEST }}
