@@ -3,10 +3,12 @@ name: Manual Workflow
 on:
   workflow_dispatch:
     inputs:
-      environment:
+      environmentx:
         description: 'Environment to deploy'
         required: true
         default: 'staging'
+        
+    
 
 jobs:
   deploy:
@@ -15,9 +17,9 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Deploy to Environment
       run: |
-        echo "Deploying to ${{ github.event.inputs.environment }} environment"
+        echo "Deploying to ${{ github.event.inputs.environmentx }} environment"
         # Add your deployment commands here
