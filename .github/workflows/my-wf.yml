@@ -1,17 +1,23 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Manual Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'staging'
+
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - run: ls /home/runner/work/
-      - run: |
-          ls ${{ github.workspace }}
-      - uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to Environment
+      run: |
+        echo "Deploying to ${{ github.event.inputs.environment }} environment"
+        # Add your deployment commands here
