@@ -3,16 +3,18 @@ on: [push]
 
 jobs:
   job1:
+    outputs:
+      o1: ${{steps.set.outputs.a}}
     runs-on: ubuntu-latest
     steps:
-    #   - uses: actions/checkout@v3
-      - run: echo $GITHUB_OUTPUT
-      - run: echo $GITHUB_OUTPUT
       - id: set
-        run: |
-            echo "a=1" >> $GITHUB_OUTPUT
-            cat $GITHUB_OUTPUT
-      - run: cat $GITHUB_OUTPUT
+        run: echo "a=1" >> $GITHUB_OUTPUT
       - run: echo ${{steps.set.outputs.a}}
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set2
+        run: echo "a=1" >> $GITHUB_OUTPUT
+      - run: echo ${{needs.job1.outputs.o1}}
 
 
