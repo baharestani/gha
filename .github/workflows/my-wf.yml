@@ -6,13 +6,13 @@ env:
 jobs:
   job0:
     runs-on: ubuntu-latest
+    env:
+      message: bye
     steps:
-      - run: sleep 3
       - run: echo $message
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 3
-      - run: date
+      - run: echo $message
 
 
