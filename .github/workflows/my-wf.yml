@@ -8,7 +8,7 @@ jobs:
     #   - uses: actions/checkout@v3
       - run: cat $GITHUB_OUTPUT
       - id: set
-        run: echo "a=1 >> $GITHUB_OUTPUT"
+        run: echo "a=1" >> $GITHUB_OUTPUT
       - run: cat $GITHUB_OUTPUT
       - run: echo ${{steps.set.outputs.a}}
       - run: echo ${{steps.set.outputs}}
