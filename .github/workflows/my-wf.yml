@@ -5,11 +5,14 @@ env:
 
 jobs:
   job0:
-    name: ${{ github.env.message }}
+    name: my job
     runs-on: ubuntu-latest
     env:
       message: bye
     steps:
+      - run: echo $message
+        env:
+          message: step1
       - run: echo $message
   job1:
     needs: job0
