@@ -2,6 +2,11 @@ name: GitHub Actions Demo
 on: [push]
 
 jobs:
+  job0:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 3
+      - run: date
   job1:
     runs-on: ubuntu-latest
     steps:
@@ -14,7 +19,7 @@ jobs:
       - run: sleep 3
       - run: date
   job3:
-    needs: [job1,job2]
+    needs: [job0,job2]
     runs-on: ubuntu-latest
     steps:
       - run: sleep 3
