@@ -6,4 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./my
+      - run: echo $GITHUB_OUTPUT
+      - run: echo 1>>$GITHUB_OUTPUT
+      - run: echo $GITHUB_OUTPUT
