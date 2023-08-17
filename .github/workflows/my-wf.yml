@@ -5,7 +5,12 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    #   - uses: actions/checkout@v3
       - run: cat $GITHUB_OUTPUT
-      - run: echo "a=1 >> $GITHUB_OUTPUT"
+      - id: set
+        run: echo "a=1 >> $GITHUB_OUTPUT"
       - run: cat $GITHUB_OUTPUT
+      - run: echo ${{steps.set.outputs.a}}
+      - run: echo ${{steps.set.outputs}}
+      - run: echo ${{steps.set}}
+
