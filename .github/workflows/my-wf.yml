@@ -11,6 +11,7 @@ jobs:
     steps:
       - run: echo $message
   job1:
+    needs: job0
     runs-on: ubuntu-latest
     steps:
       - run: echo $message
