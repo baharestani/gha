@@ -2,9 +2,8 @@ name: GitHub Actions Demo
 on: [push]
 
 jobs:
-  job0:
-    name: my job
+  job1:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./my
-
+      - uses: actions/checkout@v3
+      - uses: baharestani/gha/my@v1
