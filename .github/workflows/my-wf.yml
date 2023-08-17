@@ -5,6 +5,7 @@ env:
 
 jobs:
   job0:
+    name: $message
     runs-on: ubuntu-latest
     env:
       message: bye
@@ -15,5 +16,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo $message
-
-
