@@ -5,7 +5,7 @@ env:
 
 jobs:
   job0:
-    name: $message
+    name: ${{ github.env.message }}
     runs-on: ubuntu-latest
     env:
       message: bye
