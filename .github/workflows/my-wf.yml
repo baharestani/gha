@@ -11,6 +11,5 @@ jobs:
         run: echo "a=1" >> $GITHUB_OUTPUT
       - run: cat $GITHUB_OUTPUT
       - run: echo ${{steps.set.outputs.a}}
-      - run: echo ${{steps.set.outputs}}
-      - run: echo ${{steps.set}}
+
 
