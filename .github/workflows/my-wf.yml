@@ -16,6 +16,7 @@ jobs:
       - run: echo ${{steps.set.outcome}}
       - run: echo ${{steps.set.conclusion}}
   job2:
+    environment: production
     runs-on: ubuntu-latest
     needs: job1
     steps:
