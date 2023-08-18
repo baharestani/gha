@@ -1,7 +1,5 @@
 name: Phonebook Backend
-on: 
-  - workflow_dispatch
-  - push  
+on: deployment
 
 jobs:
   ci:
