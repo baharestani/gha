@@ -13,10 +13,6 @@ jobs:
       - id: test
         run: echo "a=1" >> $GITHUB_OUTPUT
       - run: echo ${{steps.test.outputs.a}}
-      - run: sleep 2
-      - run: sleep 2
-      - run: sleep 2
-      - run: sleep 2
   deploy-qa:
     environment: qa
     runs-on: ubuntu-latest
@@ -25,9 +21,10 @@ jobs:
       - run: |
           echo ${{needs.ci.outputs.o1}}
           sleep 2
-      - run: |
-          echo ${{needs.ci.outputs.o2}}
-          sleep 2
+      - run: sleep 2
+      - run: sleep 2
+      - run: sleep 2
+      - run: sleep 2
   deploy-prod:
     environment: production
     runs-on: ubuntu-latest
