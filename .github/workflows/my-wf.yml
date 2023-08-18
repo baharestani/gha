@@ -21,10 +21,13 @@ jobs:
       - run: |
           echo ${{needs.ci.outputs.o1}}
           sleep 2
-      - run: sleep 2
-      - run: sleep 2
-      - run: sleep 2
-      - run: sleep 2
+      - run: sleep 3
+      - run: sleep 3
+      - run: sleep 3
+      - run: sleep 3
+      - run: sleep 3
+      - run: sleep 3
+      - run: sleep 3
   deploy-prod:
     environment: production
     runs-on: ubuntu-latest
